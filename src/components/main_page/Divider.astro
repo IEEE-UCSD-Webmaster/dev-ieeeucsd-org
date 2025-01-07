@@ -1,20 +1,22 @@
 ---
-import InView from "../../components/core/InView.astro"
+import InView from "../../components/core/InView.astro";
 ---
-<InView />
 
+<InView />
+<!-- This is the parent div -->
 <div data-inview class="flex py-[15vh] px-[7vw] items-end w-full">
-    <div class="w-3/5">
-        <p class="text-ieee-yellow text-[4.5vw] font-semibold in-view:animate-flip-down">
+    <!-- Notice that the data-inview can play as long as the in-view class is present -->
+    <div data-inview class="w-3/5 in-view:animate-flip-down">
+        <p
+            class="text-ieee-yellow text-[4.5vw] font-semibold in-view:animate-flip-down"
+        >
             02
         </p>
-        <p class="text-white text-[2.5vw] font-light">
-            Amet Consectetur
-        </p>
-
+        <p class="text-white text-[2.5vw] font-light">Amet Consectetur</p>
     </div>
-    <p class="text-white text-[1.5vw]">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+    <!-- Even if the data-inview is in the parent div, this animation will not play -->
+    <p class="text-white text-[1.5vw] in-view:animate-flip-down`">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim
     </p>
-</div >
+</div>

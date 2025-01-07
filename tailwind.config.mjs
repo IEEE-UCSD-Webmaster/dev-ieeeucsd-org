@@ -24,5 +24,11 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-motion"), require("tailwindcss-animated")],
+  plugins: [
+    require("tailwindcss-motion"),
+    require("tailwindcss-animated"),
+    function ({ addVariant }) {
+      addVariant("in-view", "&.in-view");
+    },
+  ],
 };
