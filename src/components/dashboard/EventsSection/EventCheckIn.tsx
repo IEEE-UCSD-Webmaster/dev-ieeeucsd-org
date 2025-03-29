@@ -359,12 +359,12 @@ const EventCheckIn = () => {
 
     return (
         <>
-            <div className="card bg-base-100 shadow-xl border border-base-200 h-full">
+            <div className="card bg-card shadow-xl border border-border h-full">
                 <div className="card-body p-4 sm:p-6">
                     <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Event Check-in</h3>
-                    <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text text-sm sm:text-base">Enter event code to check in</span>
+                    <div className="w-full">
+                        <label className="block text-sm sm:text-base mb-2">
+                            <span className="text-sm sm:text-base">Enter event code to check in</span>
                         </label>
                         <form onSubmit={(e) => {
                             e.preventDefault();

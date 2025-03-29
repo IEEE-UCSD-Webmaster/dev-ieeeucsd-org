@@ -258,17 +258,17 @@ export default function DisplaySettings() {
                 {/* Theme Settings */}
                 <div>
                     <h4 className="font-semibold text-lg mb-2">Theme</h4>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs">
                         <select
                             value={theme}
                             onChange={handleThemeChange}
-                            className="select select-bordered"
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         >
                             <option value="light">Light</option>
                             <option value="dark">Dark</option>
                         </select>
-                        <label className="label">
-                            <span className="label-text-alt">Select your preferred theme</span>
+                        <label className="mt-1 block">
+                            <span className="text-xs text-muted-foreground">Select your preferred theme</span>
                         </label>
                     </div>
                 </div>
@@ -276,19 +276,19 @@ export default function DisplaySettings() {
                 {/* Font Size Settings */}
                 <div>
                     <h4 className="font-semibold text-lg mb-2">Font Size</h4>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="w-full max-w-xs">
                         <select
                             value={fontSize}
                             onChange={handleFontSizeChange}
-                            className="select select-bordered"
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         >
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
                             <option value="large">Large</option>
                             <option value="extra-large">Extra Large</option>
                         </select>
-                        <label className="label">
-                            <span className="label-text-alt">Select your preferred font size</span>
+                        <label className="mt-1 block">
+                            <span className="text-xs text-muted-foreground">Select your preferred font size</span>
                         </label>
                     </div>
                 </div>
@@ -297,54 +297,64 @@ export default function DisplaySettings() {
                 <div>
                     <h4 className="font-semibold text-lg mb-2">Accessibility</h4>
 
-                    <div className="form-control">
-                        <label className="cursor-pointer label justify-start gap-4">
+                    <div className="flex items-center space-x-4 mb-4">
+                        <label className="relative inline-flex items-center cursor-pointer">
                             <input
                                 type="checkbox"
                                 checked={colorBlindMode}
                                 onChange={handleColorBlindModeChange}
-                                className="toggle toggle-primary"
+                                className="sr-only peer"
                             />
-                            <div>
-                                <span className="label-text font-medium">Color Blind Mode</span>
-                                <p className="text-xs opacity-70">Enhances color contrast and uses color-blind friendly palettes</p>
-                            </div>
+                            <div className="w-11 h-6 bg-muted rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                         </label>
+                        <div>
+                            <span className="font-medium">Color Blind Mode</span>
+                            <p className="text-xs text-muted-foreground">Enhances color contrast and uses color-blind friendly palettes</p>
+                        </div>
                     </div>
 
-                    <div className="form-control mt-2">
-                        <label className="cursor-pointer label justify-start gap-4">
+                    <div className="flex items-center space-x-4">
+                        <label className="relative inline-flex items-center cursor-pointer">
                             <input
                                 type="checkbox"
                                 checked={reducedMotion}
                                 onChange={handleReducedMotionChange}
-                                className="toggle toggle-primary"
+                                className="sr-only peer"
                             />
-                            <div>
-                                <span className="label-text font-medium">Reduced Motion</span>
-                                <p className="text-xs opacity-70">Minimizes animations and transitions</p>
-                            </div>
+                            <div className="w-11 h-6 bg-muted rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                         </label>
+                        <div>
+                            <span className="font-medium">Reduced Motion</span>
+                            <p className="text-xs text-muted-foreground">Minimizes animations and transitions</p>
+                        </div>
                     </div>
                 </div>
 
-                <p className="text-sm text-info">
+                <p className="text-sm text-blue-500 dark:text-blue-400 mt-4">
                     These settings are saved to your browser using IndexedDB and your IEEE UCSD account. They will be applied whenever you log in.
                 </p>
 
-                <div className="form-control">
+                <div className="mt-4">
                     <div className="flex flex-col gap-2">
                         {hasChanges && (
-                            <p className="text-sm text-warning">
+                            <p className="text-sm text-amber-600 dark:text-amber-400">
                                 You have unsaved changes. Click "Save Settings" to apply them.
                             </p>
                         )}
                         <button
                             type="submit"
-                            className={`btn btn-primary ${saving ? 'loading' : ''}`}
+                            className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ${saving ? 'opacity-70' : ''}`}
                             disabled={saving || !hasChanges}
                         >
-                            {saving ? 'Saving...' : 'Save Settings'}
+                            {saving ? (
+                                <>
+                                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Saving...
+                                </>
+                            ) : 'Save Settings'}
                         </button>
                     </div>
                 </div>

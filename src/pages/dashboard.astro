@@ -9,8 +9,10 @@ import { SendLog } from "../scripts/pocketbase/SendLog";
 import { hasAccess, type OfficerStatus } from "../utils/roleAccess";
 import { OfficerTypes } from "../schemas/pocketbase/schema";
 import { initAuthSync } from "../scripts/database/initAuthSync";
+import { initTheme } from "../scripts/database/initTheme";
 import ToastProvider from "../components/dashboard/universal/ToastProvider";
 import FirstTimeLoginManager from "../components/dashboard/universal/FirstTimeLoginManager";
+import ThemeToggle from "../components/dashboard/universal/ThemeToggle";
 
 const title = "Dashboard";
 
@@ -40,7 +42,7 @@ const components = Object.fromEntries(
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,6 +51,10 @@ const components = Object.fromEntries(
         <script
             src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"
         ></script>
+        <script is:inline>
+            // Set a default theme until IndexedDB loads
+            document.documentElement.setAttribute("data-theme", "dark");
+        </script>
     </head>
     <body class="bg-base-200">
         <!-- First Time Login Manager - This handles the onboarding popup for new users -->
@@ -387,6 +393,7 @@ const components = Object.fromEntries(
             import { hasAccess, type OfficerStatus } from "../utils/roleAccess";
             import { OfficerTypes } from "../schemas/pocketbase/schema";
             import { initAuthSync } from "../scripts/database/initAuthSync";
+            import { initTheme } from "../scripts/database/initTheme";
 
             const auth = Authentication.getInstance();
             const get = Get.getInstance();
@@ -396,6 +403,11 @@ const components = Object.fromEntries(
             if (typeof window !== "undefined" && !window.toast) {
                 window.toast = () => {};
             }
+
+            // Initialize theme from IndexedDB
+            initTheme().catch((err) =>
+                console.error("Error initializing theme:", err)
+            );
 
             // Initialize page state
             const pageLoadingState =

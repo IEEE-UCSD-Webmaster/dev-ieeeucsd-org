@@ -184,37 +184,37 @@ export default function LeaderboardTable() {
                 <input
                     type="text"
                     placeholder="Search by name or major..."
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg 
-                    bg-white/90 dark:bg-gray-800/90 text-gray-700 dark:text-gray-200 focus:outline-none 
-                    focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 border border-base-300 dark:border-gray-700 rounded-lg
+                    bg-base-100 dark:bg-gray-800/90 text-gray-700 dark:text-gray-200 focus:outline-none
+                    focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
             </div>
 
             {/* Leaderboard table */}
-            <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead className="bg-gray-50/80 dark:bg-gray-800/80">
+                    <thead className="bg-base-200 dark:bg-gray-800/80">
                         <tr>
-                            <th scope="col" className="w-16 px-6 py-3 text-center text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                            <th scope="col" className="w-16 px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Rank
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 User
                             </th>
-                            <th scope="col" className="w-24 px-6 py-3 text-center text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                            <th scope="col" className="w-24 px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                 Points
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white/90 dark:bg-gray-900/90 divide-y divide-gray-200 dark:divide-gray-800">
+                    <tbody className="bg-base-100 dark:bg-gray-900/90 divide-y divide-gray-200 dark:divide-gray-800">
                         {currentUsers.map((user, index) => {
                             const actualRank = user.points > 0 ? indexOfFirstUser + index + 1 : null;
                             const isCurrentUser = user.id === currentUserId;
 
                             return (
-                                <tr key={user.id} className={isCurrentUser ? 'bg-indigo-50 dark:bg-indigo-900/20' : ''}>
+                                <tr key={user.id} className={isCurrentUser ? 'bg-primary/10 dark:bg-primary/20' : ''}>
                                     <td className="px-6 py-4 whitespace-nowrap text-center">
                                         {actualRank ? (
                                             actualRank <= 3 ? (
@@ -233,7 +233,7 @@ export default function LeaderboardTable() {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
                                             <div className="flex-shrink-0 h-10 w-10">
-                                                <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden relative">
+                                                <div className="w-10 h-10 rounded-full bg-base-300 dark:bg-gray-700 flex items-center justify-center overflow-hidden relative">
                                                     {user.avatar ? (
                                                         <img className="h-10 w-10 rounded-full" src={user.avatar} alt={user.name} />
                                                     ) : (
@@ -255,7 +255,7 @@ export default function LeaderboardTable() {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-center font-bold text-indigo-600 dark:text-indigo-400">
+                                    <td className="px-6 py-4 whitespace-nowrap text-center font-bold text-primary dark:text-primary">
                                         {user.points}
                                     </td>
                                 </tr>
@@ -270,8 +270,8 @@ export default function LeaderboardTable() {
                 <div className="flex justify-center mt-6">
                     <nav className="flex items-center">
                         <button
-                            className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-700 
-                            bg-white/90 dark:bg-gray-800/90 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+                            className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-base-300 dark:border-gray-700
+                            bg-base-100 dark:bg-gray-800/90 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-base-200 dark:hover:bg-gray-700 shadow-sm"
                             onClick={() => paginate(Math.max(1, currentPage - 1))}
                             disabled={currentPage === 1}
                         >
@@ -284,11 +284,11 @@ export default function LeaderboardTable() {
                         {Array.from({ length: totalPages }, (_, i) => (
                             <button
                                 key={i + 1}
-                                className={`relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 
-                                bg-white/90 dark:bg-gray-800/90 text-sm font-medium ${currentPage === i + 1
-                                        ? 'text-indigo-600 dark:text-indigo-400 border-indigo-500 dark:border-indigo-500 z-10'
-                                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                                    }`}
+                                className={`relative inline-flex items-center px-4 py-2 border border-base-300 dark:border-gray-700
+                                bg-base-100 dark:bg-gray-800/90 text-sm font-medium ${currentPage === i + 1
+                                        ? 'text-primary dark:text-primary border-primary dark:border-primary z-10 font-bold'
+                                        : 'text-gray-700 dark:text-gray-300 hover:bg-base-200 dark:hover:bg-gray-700'
+                                    } shadow-sm`}
                                 onClick={() => paginate(i + 1)}
                             >
                                 {i + 1}
@@ -296,8 +296,8 @@ export default function LeaderboardTable() {
                         ))}
 
                         <button
-                            className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-700 
-                            bg-white/90 dark:bg-gray-800/90 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700"
+                            className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-base-300 dark:border-gray-700
+                            bg-base-100 dark:bg-gray-800/90 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-base-200 dark:hover:bg-gray-700 shadow-sm"
                             onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                             disabled={currentPage === totalPages}
                         >
@@ -312,9 +312,9 @@ export default function LeaderboardTable() {
 
             {/* Show current user rank if not in current page */}
             {isAuthenticated && currentUserRank && !currentUsers.some(user => user.id === currentUserId) && (
-                <div className="mt-4 p-3 bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <div className="mt-4 p-3 bg-base-200 dark:bg-gray-800/80 border border-base-300 dark:border-gray-700 rounded-lg shadow-sm">
                     <p className="text-center text-sm text-gray-700 dark:text-gray-300">
-                        Your rank: <span className="font-bold text-indigo-600 dark:text-indigo-400">#{currentUserRank}</span>
+                        Your rank: <span className="font-bold text-primary dark:text-primary">#{currentUserRank}</span>
                     </p>
                 </div>
             )}
@@ -323,7 +323,7 @@ export default function LeaderboardTable() {
             {isAuthenticated && currentUserId &&
                 !currentUserRank &&
                 currentUsers.some(user => user.id === currentUserId) && (
-                    <div className="mt-4 p-3 bg-gray-50/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="mt-4 p-3 bg-base-200 dark:bg-gray-800/80 border border-base-300 dark:border-gray-700 rounded-lg shadow-sm">
                         <p className="text-center text-sm text-gray-700 dark:text-gray-300">
                             Participate in events to earn points and get ranked!
                         </p>

@@ -84,15 +84,20 @@ export default function ThemeToggle() {
     };
 
     return (
-        <div className="dropdown dropdown-end">
+        <div className="relative">
             <button
                 onClick={handleToggle}
-                className={`btn btn-circle btn-sm ${isLoading ? 'loading' : ''}`}
+                className={`inline-flex items-center justify-center rounded-full w-8 h-8 text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground ${isLoading ? 'opacity-70' : ''}`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
                 title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme (Light mode is experimental)`}
                 disabled={isLoading}
             >
-                {!isLoading && (
+                {isLoading ? (
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                ) : (
                     theme === 'light' ? (
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
@@ -104,9 +109,9 @@ export default function ThemeToggle() {
                     )
                 )}
             </button>
-            <div className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-2 text-xs">
-                <div className="p-2">
-                    <p className="font-bold text-warning mb-1">Warning:</p>
+            <div className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden group-hover:block">
+                <div className="p-3 text-xs">
+                    <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">Warning:</p>
                     <p>Light mode is experimental and not fully supported yet. Some UI elements may not display correctly.</p>
                 </div>
             </div>

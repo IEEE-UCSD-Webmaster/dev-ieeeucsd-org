@@ -103,28 +103,28 @@ const EventLoad = () => {
     }, []);
 
     const createSkeletonCard = () => (
-        <div className="card bg-base-200 shadow-lg animate-pulse">
+        <div className="card bg-base-200 dark:bg-gray-800/90 shadow-lg animate-pulse border border-base-300 dark:border-gray-700">
             <div className="card-body p-5">
                 <div className="flex flex-col h-full">
                     <div className="flex items-start justify-between gap-3 mb-2">
                         <div className="flex-1">
-                            <div className="skeleton h-6 w-3/4 mb-2"></div>
+                            <div className="skeleton h-6 w-3/4 mb-2 bg-base-300 dark:bg-gray-700"></div>
                             <div className="flex items-center gap-2">
-                                <div className="skeleton h-5 w-16"></div>
-                                <div className="skeleton h-5 w-20"></div>
+                                <div className="skeleton h-5 w-16 bg-base-300 dark:bg-gray-700"></div>
+                                <div className="skeleton h-5 w-20 bg-base-300 dark:bg-gray-700"></div>
                             </div>
                         </div>
                         <div className="flex flex-col items-end">
-                            <div className="skeleton h-5 w-24 mb-1"></div>
-                            <div className="skeleton h-4 w-16"></div>
+                            <div className="skeleton h-5 w-24 mb-1 bg-base-300 dark:bg-gray-700"></div>
+                            <div className="skeleton h-4 w-16 bg-base-300 dark:bg-gray-700"></div>
                         </div>
                     </div>
 
-                    <div className="skeleton h-4 w-full mb-3"></div>
+                    <div className="skeleton h-4 w-full mb-3 bg-base-300 dark:bg-gray-700"></div>
 
                     <div className="flex items-center gap-2">
-                        <div className="skeleton h-4 w-4"></div>
-                        <div className="skeleton h-4 w-1/2"></div>
+                        <div className="skeleton h-4 w-4 bg-base-300 dark:bg-gray-700"></div>
+                        <div className="skeleton h-4 w-1/2 bg-base-300 dark:bg-gray-700"></div>
                     </div>
                 </div>
             </div>
@@ -178,15 +178,15 @@ const EventLoad = () => {
             const isPastEvent = endDate < now;
 
             return (
-                <div key={event.id} className="card bg-base-200 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                <div id={`event-card-${event.id}`} key={event.id} className="card bg-base-200 dark:bg-gray-800/90 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden border border-base-300 dark:border-gray-700">
                     <div className="card-body p-3 sm:p-4">
                         <div className="flex flex-col h-full">
                             <div className="flex flex-col gap-2">
                                 <div className="flex-1">
-                                    <h3 className="card-title text-base sm:text-lg font-semibold mb-1 line-clamp-2">{event.event_name}</h3>
-                                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-base-content/70">
+                                    <h3 className="card-title text-base sm:text-lg font-semibold mb-1 line-clamp-2 text-gray-800 dark:text-gray-100">{event.event_name}</h3>
+                                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                                         <div className="badge badge-primary badge-sm">{event.points_to_reward} pts</div>
-                                        <div className="text-xs sm:text-sm opacity-75">
+                                        <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                                             {startDate.toLocaleDateString("en-US", {
                                                 weekday: "short",
                                                 month: "short",
@@ -202,7 +202,7 @@ const EventLoad = () => {
                                 </div>
                             </div>
 
-                            <div className="text-xs sm:text-sm text-base-content/70 my-2 line-clamp-2">
+                            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 my-2 line-clamp-2">
                                 {event.event_description || "No description available"}
                             </div>
 
@@ -210,14 +210,14 @@ const EventLoad = () => {
                                 {event.files && event.files.length > 0 && (
                                     <button
                                         onClick={() => window.openDetailsModal(event as ExtendedEvent)}
-                                        className="btn btn-ghost btn-sm text-xs sm:text-sm gap-1 h-8 min-h-0 px-2"
+                                        className="btn btn-ghost btn-sm text-xs sm:text-sm gap-1 h-8 min-h-0 px-2 text-gray-700 dark:text-gray-300"
                                     >
                                         <Icon icon="heroicons:document-duplicate" className="h-3 w-3 sm:h-4 sm:w-4" />
                                         Files ({event.files.length})
                                     </button>
                                 )}
                                 {isPastEvent && (
-                                    <div className={`badge ${hasAttended ? 'badge-success' : 'badge-ghost'} text-xs gap-1`}>
+                                    <div className={`badge ${hasAttended ? 'badge-success' : 'badge-ghost'} text-xs gap-1 attended-badge ${!hasAttended ? 'hidden' : ''}`}>
                                         <Icon
                                             icon={hasAttended ? "heroicons:check-circle" : "heroicons:x-circle"}
                                             className="h-3 w-3"
@@ -225,7 +225,7 @@ const EventLoad = () => {
                                         {hasAttended ? 'Attended' : 'Not Attended'}
                                     </div>
                                 )}
-                                <div className="text-xs sm:text-sm opacity-75 ml-auto">
+                                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 ml-auto">
                                     {event.location}
                                 </div>
                             </div>
@@ -480,9 +480,9 @@ const EventLoad = () => {
         return (
             <>
                 {/* Ongoing Events */}
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Ongoing Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Ongoing Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {[...Array(3)].map((_, i) => (
                                 <div key={`ongoing-skeleton-${i}`}>{createSkeletonCard()}</div>
@@ -492,9 +492,9 @@ const EventLoad = () => {
                 </div>
 
                 {/* Upcoming Events */}
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Upcoming Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Upcoming Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {[...Array(3)].map((_, i) => (
                                 <div key={`upcoming-skeleton-${i}`}>{createSkeletonCard()}</div>
@@ -504,9 +504,9 @@ const EventLoad = () => {
                 </div>
 
                 {/* Past Events */}
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Past Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Past Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {[...Array(3)].map((_, i) => (
                                 <div key={`past-skeleton-${i}`}>{createSkeletonCard()}</div>
@@ -525,14 +525,14 @@ const EventLoad = () => {
         <>
             {/* No Events Message */}
             {noEvents && (
-                <div className="card bg-base-100 shadow-xl border border-base-200 mx-4 sm:mx-6 p-8">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 mx-4 sm:mx-6 p-8">
                     <div className="text-center">
-                        <Icon icon="heroicons:calendar" className="w-16 h-16 mx-auto text-base-content/30 mb-4" />
-                        <h3 className="text-xl font-bold mb-2">No Events Found</h3>
-                        <p className="text-base-content/70 mb-4">
+                        <Icon icon="heroicons:calendar" className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+                        <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">No Events Found</h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4">
                             There are currently no events to display. This could be due to:
                         </p>
-                        <ul className="list-disc text-left max-w-md mx-auto text-base-content/70 mb-6">
+                        <ul className="list-disc text-left max-w-md mx-auto text-gray-600 dark:text-gray-300 mb-6">
                             <li className="mb-1">No events have been published yet</li>
                             <li className="mb-1">There might be a connection issue with the event database</li>
                             <li className="mb-1">The events data might be temporarily unavailable</li>
@@ -560,9 +560,9 @@ const EventLoad = () => {
 
             {/* Ongoing Events */}
             {events.ongoing.length > 0 && (
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Ongoing Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Ongoing Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {events.ongoing.map(renderEventCard)}
                         </div>
@@ -572,9 +572,9 @@ const EventLoad = () => {
 
             {/* Upcoming Events */}
             {events.upcoming.length > 0 && (
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mb-4 sm:mb-6 mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Upcoming Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Upcoming Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {events.upcoming.map(renderEventCard)}
                         </div>
@@ -584,9 +584,9 @@ const EventLoad = () => {
 
             {/* Past Events */}
             {events.past.length > 0 && (
-                <div className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mx-4 sm:mx-6">
+                <div className="card bg-base-100 dark:bg-gray-900/90 shadow-xl border border-base-200 dark:border-gray-700 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform mx-4 sm:mx-6">
                     <div className="card-body p-4 sm:p-6">
-                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4">Past Events</h3>
+                        <h3 className="card-title text-base sm:text-lg mb-3 sm:mb-4 text-gray-800 dark:text-gray-100">Past Events</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {events.past.map(renderEventCard)}
                         </div>

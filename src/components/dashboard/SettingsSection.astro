@@ -215,11 +215,13 @@ const safeLogtoApiEndpoint = logtoApiEndpoint || "";
 
     <!-- Display Settings Card -->
     <div
-        class="card bg-base-100 shadow-xl border border-base-200 hover:border-primary transition-all duration-300 hover:-translate-y-1 transform"
+        class="card bg-card shadow-xl border border-border hover:border-primary transition-all duration-300 hover:-translate-y-1 transform"
     >
         <div class="card-body">
             <h3 class="card-title flex items-center gap-3">
-                <div class="badge badge-primary p-3">
+                <div
+                    class="inline-flex items-center justify-center p-3 rounded-full bg-primary text-primary-foreground"
+                >
                     <Icon name="heroicons:computer-desktop" class="h-5 w-5" />
                 </div>
                 Display Settings
@@ -227,14 +229,18 @@ const safeLogtoApiEndpoint = logtoApiEndpoint || "";
             <p class="text-sm opacity-70 mb-4">
                 Customize your dashboard appearance and display preferences
             </p>
-            <div class="divider"></div>
+            <div class="h-px w-full bg-border my-4"></div>
 
-            <div class="alert alert-warning mb-4">
+            <div
+                class="flex p-4 mb-4 text-sm rounded-lg bg-warning/20 text-warning-foreground"
+                role="alert"
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="stroke-current shrink-0 h-6 w-6"
+                    class="flex-shrink-0 w-5 h-5 mr-3"
                     fill="none"
                     viewBox="0 0 24 24"
+                    stroke="currentColor"
                     ><path
                         stroke-linecap="round"
                         stroke-linejoin="round"
